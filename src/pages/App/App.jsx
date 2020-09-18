@@ -3,9 +3,11 @@ import { Route, Redirect } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
+import GooglePhotos from "../../components/GooglePhotos/GooglePhotos"
 import Users from "../Users/Users";
 import authService from "../../services/authService";
 import "./App.css";
+import * as PhotoAPI from "../../services/photoAPI"
 
 class App extends Component {
   state = {
@@ -22,6 +24,10 @@ class App extends Component {
     this.setState({ user: authService.getUser() });
   };
 
+  handleGoogleLogin = async () => {
+    const response = await PhotoAPI.getGoogleLogin()
+  }
+
   render() {
     const { user } = this.state
     return (
@@ -33,6 +39,7 @@ class App extends Component {
           render={() => (
             <main>
               <h1>Welcome. This is an authorization template.</h1>
+              < GooglePhotos />
             </main>
           )}
         />
